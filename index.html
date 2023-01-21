@@ -1,0 +1,83 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>Random Word Translator</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	<h1 id="word"></h1>
+	<h1 id="translation"></h1>
+
+	<script>
+		// Get a random word from the dictionary API
+		$.ajax({
+			url: "https://random-word-api.herokuapp.com/word?number=1",
+			success: function(response) {
+				var word = response[0];
+				$("#word").text(word);
+
+				// Translate the word to Belarusian using the Google Translate API
+				$.ajax({
+					url: "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=be&dt=t&q=" + word,
+					success: function(response) {
+						var translation = response[0][0][0];
+						$("#translation").text(translation);
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Word Translator</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	<h1 id="word"></h1>
+	<h1 id="translation"></h1>
+	<h2 id="definition"></h2>
+	<h2 id="definition-translation"></h2>
+
+	<script>
+		// Get a random word from the dictionary API
+		$.ajax({
+			url: "https://random-word-api.herokuapp.com/word?number=1",
+			success: function(response) {
+				var word = response[0];
+				$("#word").text(word);
+
+				// Translate the word to Belarusian using the Google Translate API
+				$.ajax({
+					url: "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=be&dt=t&q=" + word,
+					success: function(response) {
+						var translation = response[0][0][0];
+						$("#translation").text(translation);
+
+						// Get the definition of the word from a free dictionary API
+						$.ajax({
+							url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=your-api-key",
+							success: function(response) {
+								var definition = response[0].shortdef[0];
+								$("#definition").text(definition);
+
+								// Translate the definition to Belarusian using the Google Translate API
+								$.ajax({
+									url: "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=be&dt=t&q=" + definition,
+									success: function(response) {
+										var definitionTranslation = response[0][0][0];
+										$("#definition-translation").text(definitionTranslation);
+									}
+								});
+							}
+						});
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>
