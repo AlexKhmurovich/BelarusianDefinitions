@@ -59,7 +59,7 @@
 
 						// Get the definition of the word from a free dictionary API
 						$.ajax({
-							url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=your-api-key",
+							url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=dfb3b2f8-1d79-4dfa-9cce-875262ead2b7",
 							success: function(response) {
 								var definition = response[0].shortdef[0];
 								$("#definition").text(definition);
